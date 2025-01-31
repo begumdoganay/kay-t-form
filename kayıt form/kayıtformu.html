@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profesyonel Kayıt Formu</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #ecf0f1;
+            --text-color: #34495e;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 2rem auto;
+            background-color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .header h1 {
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+        .language-toggle {
+            display: flex;
+            justify-content: center;
+            background-color: #f8f9fa;
+            padding: 0.5rem;
+        }
+        .language-toggle button {
+            background: none;
+            border: none;
+            margin: 0 10px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        .language-toggle button.active {
+            opacity: 1;
+            color: var(--secondary-color);
+        }
+        .form-wrapper {
+            padding: 2rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        .radio-group label, .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        #submit {
+            position: relative;
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+            font-weight: 600;
+        }
+        #submit:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        #submit:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        #submit .submit-text {
+            position: relative;
+            z-index: 2;
+        }
+        #submit .submit-icon {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        #submit:hover .submit-icon {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-toggle" style="display: flex; justify-content: center; background-color: #f8f9fa; padding: 0.5rem; gap: 10px;">
+            <button onclick="changeLanguage('tr')" class="active" style="display: flex; align-items: center; gap: 5px; border: none; background: none; cursor: pointer;">
+                <img src="https://flagcdn.com/w40/tr.png" alt="TR" width="20"> <span>Türkçe</span>
+            </button>
+            <button onclick="changeLanguage('en')" style="display: flex; align-items: center; gap: 5px; border: none; background: none; cursor: pointer;">
+                <img src="https://flagcdn.com/w40/gb.png" alt="EN" width="20"> <span>English</span>
+            </button>
+            <button onclick="changeLanguage('de')" style="display: flex; align-items: center; gap: 5px; border: none; background: none; cursor: pointer;">
+                <img src="https://flagcdn.com/w40/de.png" alt="DE" width="20"> <span>Deutsch</span>
+            </button>
+        </div>
+        
+
+        <div class="header">
+            <h1 id="title">Profesyonel Kayıt Formu</h1>
+        </div>
+
+        <div class="form-wrapper">
+            <form id="survey-form">
+                <div class="form-group">
+                    <label for="name">Ad Soyad</label>
+                    <input type="text" id="name" class="form-control" placeholder="Tam adınızı giriniz" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-posta Adresi</label>
+                    <input type="email" id="email" class="form-control" placeholder="E-posta adresinizi giriniz" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Yaş</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="number" id="age" class="form-control" min="13" max="99" placeholder="Yaşınızı giriniz" required>
+                        <select id="age-select" class="form-control" style="max-width: 80px;">
+                            <option value="">Seç</option>
+                            <script>
+                                for (let i = 13; i <= 99; i++) {
+                                    document.write(`<option value="${i}">${i}</option>`);
+                                }
+                            </script>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="profession">Meslek Alanı</label>
+                    <select id="profession" class="form-control" required>
+                        <option value="">Mesleğinizi Seçiniz</option>
+                        <optgroup label="Teknoloji & Bilişim">
+                            <option value="softwareArchitect">Yazılım Mimarı</option>
+                            <option value="aiSpecialist">Yapay Zeka Uzmanı</option>
+                            <option value="cloudEngineer">Bulut Çözümleri Mühendisi</option>
+                            <option value="dataScientist">Veri Bilimci</option>
+                            <option value="cyberSecurityExpert">Siber Güvenlik Uzmanı</option>
+                            <option value="blockchainDeveloper">Blokzincir Geliştiricisi</option>
+                        </optgroup>
+                        <optgroup label="Yönetim & Strateji">
+                            <option value="digitalTransformationLead">Dijital Dönüşüm Lideri</option>
+                            <option value="innovationManager">İnovasyon Yöneticisi</option>
+                            <option value="strategyConsultant">Strateji Danışmanı</option>
+                            <option value="sustainabilityDirector">Sürdürülebilirlik Direktörü</option>
+                            <option value="riskAnalyst">Risk Analisti</option>
+                            <option value="executiveCoach">Yönetici Koçu</option>
+                        </optgroup>
+                        <optgroup label="Yaratıcı Endüstriler">
+                            <option value="uxResearcher">UX Araştırmacısı</option>
+                            <option value="digitalMediaProducer">Dijital Medya Yapımcısı</option>
+                            <option value="contentStrategist">İçerik Stratejisti</option>
+                            <option value="gameDesigner">Oyun Tasarımcısı</option>
+                            <option value="brandingExpert">Marka Uzmanı</option>
+                        </optgroup>
+                        <optgroup label="Sağlık & Bilim">
+                            <option value="biotech">Biyoteknoloji Uzmanı</option>
+                            <option value="researchScientist">Araştırma Bilimcisi</option>
+                            <option value="healthTechInnovator">Sağlık Teknolojisi İnovatörü</option>
+                            <option value="medicalDataAnalyst">Tıbbi Veri Analisti</option>
+                        </optgroup>
+                        <optgroup label="Finans & Girişimcilik">
+                            <option value="finTechInnovator">Finans Teknolojisi İnovatörü</option>
+                            <option value="investmentStrategist">Yatırım Stratejisti</option>
+                            <option value="startupFounder">Girişim Kurucusu</option>
+                            <option value="cryptoAnalyst">Kripto Para Analisti</option>
+                        </optgroup>
+                        <option value="other">Diğer</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Eğitim Düzeyi</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="education" value="bachelor"> Lisans</label>
+                        <label><input type="radio" name="education" value="master"> Yüksek Lisans</label>
+                        <label><input type="radio" name="education" value="phd"> Doktora</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Profesyonel İlgi Alanları</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="ai"> Yapay Zeka</label>
+                        <label><input type="checkbox" value="dataScience"> Veri Bilimi</label>
+                        <label><input type="checkbox" value="digitalTransformation"> Dijital Dönüşüm</label>
+                        <label><input type="checkbox" value="sustainability"> Sürdürülebilirlik</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Ek Açıklama</label>
+                    <textarea id="comments" class="form-control" rows="4" placeholder="Eklemek istediğiniz notlar"></textarea>
+                </div>
+
+                <button type="submit" id="submit">
+                    <span class="submit-text">Kayıt Ol</span>
+                    <span class="submit-icon"><i class="fas fa-paper-plane"></i></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function changeLanguage(lang) {
+            const translations = {
+                'tr': {
+                    title: 'Profesyonel Kayıt Formu',
+                    // Diğer çeviriler buraya eklenecek
+                },
+                'en': {
+                    title: 'Professional Registration Form',
+                    // Diğer çeviriler buraya eklenecek
+                },
+                'de': {
+                    title: 'Professionelles Registrierungsformular',
+                    // Diğer çeviriler buraya eklenecek
+                }
+            };
+
+            document.getElementById('title').textContent = translations[lang].title;
+            // Diğer dil güncellemeleri
+        }
+    </script>
+    <script>
+        document.getElementById("age-select").addEventListener("change", function() {
+            document.getElementById("age").value = this.value;
+        });
+    </script>
+</body>
+</html>
